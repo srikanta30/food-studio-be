@@ -1,0 +1,35 @@
+{
+  "name": "foa-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "PORT=3001 NODE_ENV=development node $NODE_DEBUG_OPTION ./bin/www",
+    "start:staging": "PORT=3001 NODE_ENV=staging node $NODE_DEBUG_OPTION ./bin/www",
+    "start:prod": "PORT=3001 NODE_ENV=production node $NODE_DEBUG_OPTION ./bin/www",
+    "start:watch": "PORT=3001 NODE_ENV=development nodemon $NODE_DEBUG_OPTION ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/srikanta30/Food-Ordering-App-Server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srikanta30/Food-Ordering-App-Server/issues"
+  },
+  "homepage": "https://github.com/srikanta30/Food-Ordering-App-Server#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.0",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.7.2"
+  }
+}
