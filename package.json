@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "PORT=3001 NODE_ENV=development node $NODE_DEBUG_OPTION ./bin/www",
-    "start:staging": "PORT=3001 NODE_ENV=staging node $NODE_DEBUG_OPTION ./bin/www",
-    "start:prod": "PORT=3001 NODE_ENV=production node $NODE_DEBUG_OPTION ./bin/www",
-    "start:watch": "PORT=3001 NODE_ENV=development nodemon $NODE_DEBUG_OPTION ./bin/www"
+    "server": "nodemon $NODE_DEBUG_OPTION ./bin/www",
+    "start": "node $NODE_DEBUG_OPTION ./bin/www",
+    "start:heroku": "node $NODE_DEBUG_OPTION ./bin/www"
   },
   "repository": {
     "type": "git",
