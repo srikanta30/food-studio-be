@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 
         let queryCuisines;
         const page = req.query.page || 1;
-        const size = 8;
+        const size = 20;
 
         if (req.query.cuisines) {
             queryCuisines = req.query.cuisines.split(',');
@@ -81,7 +81,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:search/search', async (req, res) => {
     try {
 
-        const size = 8;
+        const size = 20;
 
         const restaurants = await Restaurant.find({ $or: [{name: { $regex: req.query.s, $options: 'i' }}, {cuisine: { $regex: req.query.s, $options: 'i' }}, {place: { $regex: req.query.s, $options: 'i' }}]}).lean().exec();
 
