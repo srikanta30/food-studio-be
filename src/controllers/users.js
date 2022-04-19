@@ -28,8 +28,12 @@ router.post('/register',
         .withMessage('Invalid Password Format!')
         .isLength({ min: 8 })
         .withMessage('Password should be 8-20 characters long!'),
+        body('role')
+        .notEmpty()
+        .withMessage('Role is required!'),
 
     async (req, res) => {
+
         const errors = validationResult(req);
 
         let finalErrors = null;
@@ -41,7 +45,6 @@ router.post('/register',
                     message: error.msg
                 };
             });
-
             return res.status(400).send({ error: finalErrors });
         }
 
@@ -56,11 +59,21 @@ router.post('/register',
 
             const token = newToken(user);
 
-            return res.status(201).send({ token });
+            const data = {
+                token: token,
+                user: {
+                    name: user.name,
+                    email: user.email,
+                    role: user.role,
+                    id: user._id,
+                }
+            }
+
+            return res.status(201).send({ data });
 
         } catch (err) {
-            console.log("Error:", err);
-            return res.status(400).send({ error: "Something went wrong!" });
+
+            return res.status(400).send({ error: err});
         }
     }
 )
@@ -86,6 +99,7 @@ router.post('/login', async (req, res) => {
             user: {
                 name: user.name,
                 email: user.email,
+                role: user.role,
                 id: user._id,
             }
         }
@@ -93,8 +107,7 @@ router.post('/login', async (req, res) => {
         return res.status(200).send({ data });
 
     } catch (err) {
-        console.log("Error:", err);
-        return res.status(400).send({ error: 'Something went wrong!' });
+        return res.status(400).send({ error: err});
     }
 })
 
@@ -103,12 +116,12 @@ router.get('/getuser', authenticate, async (req, res) => {
         const payload = {
             name: req.user.user.name,
             email: req.user.user.email,
+            role: req.user.user.role,
             id: req.user.user._id,
         }
         return res.status(200).send({ user: payload });
     } catch (err) {
-        console.log('Error:', err);
-        return res.status(400).send({ error: 'Something went wrong!' });
+        return res.status(400).send({ error: err });
     }
 });
 
@@ -122,15 +135,15 @@ router.patch('/:id', authenticate, async (req, res) => {
         const payload = {
             name: user.name,
             email: user.email,
+            role: user.role,
             id: user._id,
         }
 
         return res.status(200).send({ user: payload });
 
     } catch (err) {
-        console.log('Error:', err);
 
-        return res.status(400).send({ error: 'Something went wrong!' });
+        return res.status(400).send({ error: err });
     }
 })
 

@@ -5,7 +5,6 @@ function verifyToken(token) {
     return new Promise(function(resolve, reject) {
         jwt.verify(token, process.env.JWT_SECRET_KEY, function(err, res) {
             if(err) return reject(err);
-
             return resolve(res);
         });
     });
@@ -26,8 +25,7 @@ async function authenticate(req, res, next) {
 
         return next();
     } catch(err) {
-        console.log("Error:", err);
-        return res.status(400).send({error: "Something went wrong!"});
+        return res.status(400).send({error: err});
     }
 }
 
